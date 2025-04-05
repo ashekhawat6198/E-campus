@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from './components/Navbar'
 import {Routes,Route} from "react-router-dom"
 import Home from './Pages/Home'
+import ForgotPassword from './Pages/ForgotPassword'
 function App() {
   return (
     <>
@@ -10,7 +11,7 @@ function App() {
        <Routes>
 
       <Route path='/' element={<Home/>}/>
-
+       <Route path='/forgotPassword' element={<ForgotPassword/>}/>
 
 
 

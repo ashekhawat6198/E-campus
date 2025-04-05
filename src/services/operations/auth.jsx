@@ -5,7 +5,7 @@ import { setloading, setToken } from "../../slices/authSlice";
 
 const {
     LOGIN_API,
-
+   RESET_PASSWORD_TOKEN
 }=endPoints
 
 
@@ -39,3 +39,30 @@ export function login(userName, password, navigate){
           toast.dismiss(toastId);
      }
 }
+
+export function resetpasswordtoken(userName, setEmailsent) {
+    return async (dispatch) => {
+      const toastId = toast.loading("Loading...");
+      dispatch(setloading(true));
+      console.log(userName);
+      try {
+        const response = await apiConnector("POST", RESET_PASSWORD_TOKEN, {
+          userName,
+        });
+  
+        console.log("RESETPASSTOKEN RESPONSE............", response);
+  
+        if (!response.data.success) {
+          throw new Error(response.data.message);
+        }
+  
+        toast.success("Reset Email Sent");
+        setEmailsent(true);
+      } catch (err) {
+        console.log("Reset Password Token Error.....", err.message);
+        toast.error("Failed to sent reset email");
+      }
+      toast.dismiss(toastId);
+      dispatch(setloading(false));
+    };
+  }
